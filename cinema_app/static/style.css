@@ -1,0 +1,30 @@
+body {
+  background-color: #570808;
+}
+
+.nav-bar {
+
+  overflow: hidden;
+  background-color: #494949;
+}
+
+.nav-bar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 1em 2em;
+  font-size: 1em;
+}
+
+.nav-bar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-bar a.active {
+
+}
+
+p {
+  font-size: 2em;
+}
