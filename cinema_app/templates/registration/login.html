@@ -1,0 +1,17 @@
+{% extends "__main.html" %}
+{% block head %}
+    <title>Login</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/script.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="div-form">
+
+    <form class="django" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log In</button>
+    </form>
+    </div>
+{% endblock %}

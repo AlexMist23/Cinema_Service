@@ -1,0 +1,79 @@
+body {
+  background-color: #570808;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.nav-bar {
+  overflow: hidden;
+  background-color: #494949;
+}
+
+.nav-bar a {
+  color: white;
+  text-align: center;
+  text-decoration: None;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  border: solid 1px #333333;
+}
+
+.nav-bar-right{
+  float: right;
+}
+
+.nav-bar-left{
+  float: left;
+}
+
+.nav-bar a:hover {
+  background-color: #969696;
+  color: black;
+  border-top: solid 1px white;
+}
+
+.lorem-ipsum{
+  margin: 8px;
+}
+
+p {
+  color: #ddd;
+}
+
+form{
+  background: #494949;
+  margin: auto;
+  width: fit-content;
+  border: solid #2d2d2d;
+  margin-top: 8em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+form input{
+  background: white;
+  padding: 1em;
+  width: 36em;
+  border: 0.3em solid #3c3c3c;
+}
+
+form.django label{
+  display: none;
+}
+
+form.django button{
+  background: #373737;
+  padding: 0.5em;
+  margin-top: 4%;
+  width: 41%;
+  align-self: center;
+  border: 0.15em solid #6d6d6d;
+  color: #eee;
+}
+
+form.django p{
+  margin: 3%;
+  width: fit-content;
+  align-self: center;
+}
