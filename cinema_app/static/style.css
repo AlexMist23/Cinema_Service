@@ -12,8 +12,9 @@ body {
   float: left;
   color: white;
   text-align: center;
+  text-decoration: None;
   padding: 1em 2em;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .nav-bar a:hover {
