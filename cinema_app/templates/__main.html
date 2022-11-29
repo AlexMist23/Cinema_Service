@@ -22,7 +22,7 @@
         <a class="nav-bar-right">{{ user.username }}</a>
     {% else %}
         <a class="nav-bar-right" href="{% url 'login' %}">Log In</a>
-        <a class="nav-bar-right" href="signup/">Sign Up</a>
+        <a class="nav-bar-right" href="{% url 'signup' %}">Sign Up</a>
     {% endif %}
 
 </div>

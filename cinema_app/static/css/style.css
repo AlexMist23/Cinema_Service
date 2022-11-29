@@ -37,43 +37,52 @@ body {
 }
 
 p {
-  color: #ddd;
+  color: white;
 }
 
-form{
+.div-form-django{
+  
+  margin: 10em auto;
+  width: 30em;
+}
+form.django{
   background: #494949;
-  margin: auto;
-  width: fit-content;
   border: solid #2d2d2d;
-  margin-top: 8em;
-  padding: 1em;
   display: flex;
   flex-direction: column;
+  padding: 1em;
 }
 
 form input{
   background: white;
-  padding: 1em;
-  width: 36em;
   border: 0.3em solid #3c3c3c;
+  padding: 0.5em;
 }
 
 form.django label{
-  display: none;
+  font-weight: bold;
 }
 
 form.django button{
   background: #373737;
-  padding: 0.5em;
-  margin-top: 4%;
-  width: 41%;
-  align-self: center;
-  border: 0.15em solid #6d6d6d;
   color: #eee;
+  padding: 0.5em;
+  width: 31.25%;
+  margin: auto;
 }
 
 form.django p{
-  margin: 3%;
-  width: fit-content;
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+form.django ul{
+  color: #bfbfbf;
+  font-style: italic;
+}
+
+.helptext{
+  
+  color: #bfbfbf;
+  font-style: italic;
 }
