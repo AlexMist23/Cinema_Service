@@ -1,0 +1,21 @@
+{% extends "__main.html" %}
+
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      <label for="city">Imię:</label>
+      <input type="text" id="city" name="city">
+
+      <label for="street">Rok studiów</label>
+      <input type="text" id="street" name="street" maxlength="16">
+
+      <label for="is_active">Status</label>
+      <input type="checkbox" id="is_active" name="is_active" checked>
+
+      <input type="submit" value="add">
+    </form>
+{% endblock %}

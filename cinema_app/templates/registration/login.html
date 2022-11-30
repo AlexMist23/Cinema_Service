@@ -7,11 +7,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="div-form-django">
-        <form class="django" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Log In</button>
-        </form>
-    </div>
+    <form class="accounts" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
 {% endblock %}

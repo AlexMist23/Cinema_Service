@@ -40,17 +40,14 @@ p {
   color: white;
 }
 
-.div-form-django{
-  
-  margin: 10em auto;
-  width: 30em;
-}
-form.django{
+form.accounts{
   background: #494949;
   border: solid #2d2d2d;
   display: flex;
   flex-direction: column;
   padding: 1em;
+  margin: 10em auto;
+  width: 30em;
 }
 
 form input{
@@ -59,11 +56,11 @@ form input{
   padding: 0.5em;
 }
 
-form.django label{
+form label{
   font-weight: bold;
 }
 
-form.django button{
+form button{
   background: #373737;
   color: #eee;
   padding: 0.5em;
@@ -71,12 +68,12 @@ form.django button{
   margin: auto;
 }
 
-form.django p{
+form p{
   display: flex;
   flex-direction: column;
 }
 
-form.django ul{
+form ul{
   color: #bfbfbf;
   font-style: italic;
 }

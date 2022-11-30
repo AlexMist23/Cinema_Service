@@ -26,6 +26,12 @@
     {% endif %}
 
 </div>
+
+{% if user.is_authenticated and user.is_superuser %}
+<div class="nav-bar">
+    <a class="nav-bar-left" href="/">Add Movie</a>
+</div>
+{% endif %}
 {% block content %}
 {% endblock %}
 </body>
