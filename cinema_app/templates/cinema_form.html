@@ -7,15 +7,24 @@
 {% block content %}
     <form action="" method="POST">
       {% csrf_token %}
-      <label for="city">Imię:</label>
-      <input type="text" id="city" name="city">
-
-      <label for="street">Rok studiów</label>
-      <input type="text" id="street" name="street" maxlength="16">
-
-      <label for="is_active">Status</label>
-      <input type="checkbox" id="is_active" name="is_active" checked>
-
-      <input type="submit" value="add">
+        <p>
+            <label for="city">Imię:</label>
+            <input type="text" id="city" name="city">
+        </p>
+        <p>
+            <label for="city">Imię:</label>
+            <input type="text" id="city" name="city">
+        </p>
+        <p>
+            <label for="street">Rok studiów</label>
+            <input type="text" id="street" name="street" maxlength="16">
+        </p>
+        <p>
+            <label for="is_active">Status</label>
+            <input type="checkbox" id="is_active" name="is_active" checked>
+        </p>
+        <p>
+            <input type="submit" value="add">
+        </p>
     </form>
 {% endblock %}

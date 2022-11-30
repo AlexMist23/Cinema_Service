@@ -40,7 +40,7 @@ p {
   color: white;
 }
 
-form.accounts{
+form{
   background: #494949;
   border: solid #2d2d2d;
   display: flex;
@@ -82,4 +82,8 @@ form ul{
   
   color: #bfbfbf;
   font-style: italic;
+}
+
+.admin{
+  border-top: solid;
 }

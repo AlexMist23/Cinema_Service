@@ -13,9 +13,9 @@
 
 <div class="nav-bar">
     <a class="nav-bar-left" href="/">Home</a>
-    <a class="nav-bar-left" href="/">Contact</a>
-    <a class="nav-bar-left" href="/">About</a>
     <a class="nav-bar-left" href="/">Premieres</a>
+    <a class="nav-bar-left" href="/">About</a>
+    <a class="nav-bar-left" href="/">Contact</a>
 
     {% if user.is_authenticated %}
         <a class="nav-bar-right" href="{% url 'logout' %}">Log Out</a>
@@ -28,8 +28,8 @@
 </div>
 
 {% if user.is_authenticated and user.is_superuser %}
-<div class="nav-bar">
-    <a class="nav-bar-left" href="/">Add Movie</a>
+<div class="nav-bar admin">
+    <a class="nav-bar-left" href="/add/cinema/">Add Movie</a>
 </div>
 {% endif %}
 {% block content %}

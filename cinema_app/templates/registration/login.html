@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="accounts" method="post">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Log In</button>
