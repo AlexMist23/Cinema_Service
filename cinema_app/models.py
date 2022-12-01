@@ -7,7 +7,7 @@ class Cinema(models.Model):
     street = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=16)
     email = models.CharField(max_length=32)
-    telephone = models.IntegerField()
+    telephone = models.CharField(max_length=16)
 
 
 class Hall(models.Model):

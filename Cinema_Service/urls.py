@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from cinema_app.views import LandingPage, SignUpView, AddCinema
+from cinema_app.views import LandingPageView, SignUpView, \
+    CinemaAddView, HallAddView, \
+    CinemaListView, \
+    CinemaDetailsView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
     path('signup/', SignUpView.as_view(), name='signup'),
-    path('add/cinema/', AddCinema.as_view()),
-    path('', LandingPage.as_view()),
+    path('cinema/details/<int=id>', CinemaDetailsView )
+    path('cinema/list', CinemaListView.as_view()),
+    path('cinema/add', CinemaAddView.as_view()),
+    path('hall/add', HallAddView.as_view()),
+    path('', LandingPageView.as_view()),
 ]

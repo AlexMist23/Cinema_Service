@@ -10,29 +10,41 @@
 </head>
 
 <body>
+<div class="navbar">
 
-<div class="nav-bar">
-    <a class="nav-bar-left" href="/">Home</a>
-    <a class="nav-bar-left" href="/">Premieres</a>
-    <a class="nav-bar-left" href="/">About</a>
-    <a class="nav-bar-left" href="/">Contact</a>
+    <div class="navbar-row">
+    <a class="navbar-el" href="/">Home</a>
+    <a class="navbar-el" href="/">Premieres</a>
+    <a class="navbar-el" href="/">About</a>
+    <a class="navbar-el" href="/">Contact</a>
 
     {% if user.is_authenticated %}
-        <a class="nav-bar-right" href="{% url 'logout' %}">Log Out</a>
-        <a class="nav-bar-right">{{ user.username }}</a>
+        <a class="navbar-el-r" href="{% url 'logout' %}">Log Out</a>
+        <a class="navbar-el">{{ user.username }}</a>
     {% else %}
-        <a class="nav-bar-right" href="{% url 'login' %}">Log In</a>
-        <a class="nav-bar-right" href="{% url 'signup' %}">Sign Up</a>
+        <a class="navbar-el-r" href="{% url 'login' %}">Log In</a>
+        <a class="navbar-el" href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+    </div>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <div class="navbar-row">
+        <div class="navbar-el-drop">
+            <a class="navbar-el" href="cinema/list">Cinema</a>
+            <a href="/cinema/add" class="drop-item">Add</a>
+            <a href="/" class="drop-item">Delete</a>
+        </div>
+        <div class="navbar-el-drop">
+            <a class="navbar-el">Hall</a>
+            <a href="/hall/add" class="drop-item">Add</a>
+        </div>
+    </div>
     {% endif %}
 
 </div>
 
-{% if user.is_authenticated and user.is_superuser %}
-<div class="nav-bar admin">
-    <a class="nav-bar-left" href="/add/cinema/">Add Movie</a>
-</div>
-{% endif %}
 {% block content %}
 {% endblock %}
+
 </body>
 </html>

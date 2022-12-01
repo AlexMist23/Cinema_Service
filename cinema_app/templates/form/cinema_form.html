@@ -1,0 +1,18 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p></p>
+        <button type="submit">Add Cinema</button>
+    </form>
+
+{% endblock %}
