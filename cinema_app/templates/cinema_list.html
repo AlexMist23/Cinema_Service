@@ -1,0 +1,21 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <li class="list">
+        <h1 style="margin: auto">Cinemas List</h1>
+        {% for cinema in cinemas %}
+        <ul class="list-el">
+            <li>{{ cinema.city }}</li>
+            <a href="/cinema/details/{{ cinema.id }}">edit</a>
+        </ul>
+        {% endfor %}
+    </li>
+
+{% endblock %}
