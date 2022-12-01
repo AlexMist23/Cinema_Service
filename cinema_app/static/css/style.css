@@ -5,6 +5,26 @@ body {
   color: white;
 }
 
+button{
+  background: #373737;
+  padding: 0.8em 2em;
+  margin: auto;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border: solid grey 0.1em;
+}
+
+.button{
+  background: #373737;
+  padding: 0.8em 2em;
+  margin: auto;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border: solid grey 0.1em;
+}
+
 .navbar {
   background-color: #494949;
   display: flex;
@@ -48,6 +68,7 @@ body {
 .navbar-el-drop:hover .drop-item{
   display: block;
 }
+
 form{
   background: #494949;
   border: solid #2d2d2d;
@@ -65,14 +86,6 @@ form input{
 
 form label{
   font-weight: bold;
-}
-
-form button{
-  background: #373737;
-  color: #eee;
-  padding: 0.5em;
-  width: 31.25%;
-  margin: auto;
 }
 
 form p{
@@ -107,18 +120,41 @@ form ul{
 .list{
   display: flex;
   flex-direction: column;
+  width: 50em;
+  margin: 10em auto;
+  background: #494949;
+  padding: 1em;
+  border: solid #242424 0.1em;
 }
 
 .list-el {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  border: solid #242424 0.1em;
 }
 
+.list-el-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: solid #242424 0.1em;
+}
 ul.list-el li {
   width: 15em;
   list-style-type: none;
+  margin: auto;
 }
-ul.list-el a {
-  width: 15em;
-  font-style: italic;
+
+.details-list-el {
+  display: flex;
+  flex-direction: column;
+  margin: auto 5%;
+}
+
+.details-list-el-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: solid #242424 0.1em;
 }

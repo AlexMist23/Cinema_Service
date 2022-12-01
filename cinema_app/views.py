@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View, generic
 from django.urls import reverse_lazy
 from .forms import CinemaForm, HallForm
@@ -18,8 +19,9 @@ class LandingPageView(View):
 
 
 class CinemaDetailsView(View):
-    def get(self, request, id):
-        cnx = {}
+    def get(self, request, cinema_id):
+        cinema = Cinema.objects.get(pk=cinema_id)
+        cnx = {'cinema': cinema}
         return render(request, "cinema_details.html", cnx)
 
 

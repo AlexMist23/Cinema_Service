@@ -2,14 +2,24 @@
 
 
 {% block head %}
-    <title>Cinema Details</title>
+    <title>{{ cinema.city }}</title>
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="cinema-details">
-
+    <div class="list">
+        <div class="details-list-el">
+            <h1>City: {{ cinema.city }}</h1>
+            <p>Street: {{ cinema.street }}</p>
+            <p>Postal Code: {{ cinema.postal_code }}</p>
+            <p>E-mail: {{ cinema.email }}</p>
+            <p>Tel: {{ cinema.telephone }}</p>
+        </div>
+        <div class="details-list-el-buttons">
+            <a class="button">UPDATE</a>
+            <a class="button">DELETE</a>
+        </div>
     </div>
 
 {% endblock %}
