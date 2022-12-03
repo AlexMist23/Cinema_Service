@@ -56,28 +56,42 @@ class CinemaAddView(View):
         cnx = {
             "response": response
         }
-        return render(request, 'form_response.html', cnx)
+        return render(request, 'form/form_response.html', cnx)
 
 
 class HallAddView(View):
-    def get(self, request):
+    def get(self, request, cinema_id):
+        cinema = Cinema.objects.get(pk=cinema_id)
         form = HallForm()
-        return render(request, 'form/cinema_form.html', {'form': form})
+        cnx = {
+            'cinema': cinema,
+            'form': form,
+               }
+        return render(request, 'form/hall_form.html', cnx)
 
-    def post(self, request):
+    def post(self, request, cinema_id):
+        form_again = HallForm()
         form = HallForm(request.POST)
         if form.is_valid():
             nr = form.cleaned_data['nr']
+            seats_columns = form.cleaned_data['seats_columns']
+            seats_rows = form.cleaned_data['seats_rows']
             cinema_id = form.cleaned_data['cinema_id']
 
-            h = Hall(nr=nr, cinema_id=cinema_id)
+            h = Hall(nr=nr, cinema_id=cinema_id, seats_columns=seats_columns, seats_rows=seats_rows)
             h.save()
 
-            response = f"Added new Hall nr: {nr} to the Cinema: {cinema_id.city} !"
+            for seat in range(seats_columns * seats_rows):
+                s = Seat(nr=seat, hall_id=h)
+                s.save()
+
+            response = f'{cinema_id.city}Hall {h.nr} Added!'
+
         else:
-            response = "Input correct data!"
+            response = "Hall not added"
 
         cnx = {
-            "response": response
-        }
-        return render(request, 'form_response.html', cnx)
+            'response': response,
+            'form': form_again
+            }
+        return render(request, 'form/hall_form.html', cnx)

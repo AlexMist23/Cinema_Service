@@ -2,12 +2,13 @@
 
 
 {% block head %}
-    <title>Home</title>
+    <title>Add Cinema</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/cinema_form.js' %}"></script>
 {% endblock %}
 
 
 {% block content %}
-
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

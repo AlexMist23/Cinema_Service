@@ -13,7 +13,7 @@
         {% for cinema in cinemas %}
         <ul class="list-el">
             <li>{{ cinema.city }}</li>
-            <a class="button" href="/cinema/details/{{ cinema.id }}">Edit</a>
+            <a class="button" href="/cinema/{{ cinema.id }}">Edit</a>
         </ul>
         {% endfor %}
     </li>

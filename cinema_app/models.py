@@ -5,14 +5,16 @@ from django.db import models
 class Cinema(models.Model):
     city = models.CharField(max_length=16)
     street = models.CharField(max_length=32)
-    postal_code = models.CharField(max_length=16)
-    email = models.CharField(max_length=32)
-    telephone = models.CharField(max_length=16)
+    postal_code = models.CharField(max_length=6)
+    email = models.EmailField(max_length=32)
+    telephone = models.IntegerField()
 
 
 class Hall(models.Model):
     nr = models.IntegerField()
     cinema_id = models.ForeignKey(Cinema, on_delete=models.CASCADE)
+    seats_columns = models.IntegerField(default=16)
+    seats_rows = models.IntegerField(default=12)
 
 
 class Seat(models.Model):
