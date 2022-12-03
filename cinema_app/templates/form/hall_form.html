@@ -1,0 +1,28 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Add Hall</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/hall_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="form-above">
+        <p>Cinema: {{ cinema.city }}</p>
+        {% if response %}
+            <br>
+            <p>{{ response }}</p>
+        {% endif %}
+
+    </div>
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Hall</button>
+    </form>
+
+{% endblock %}
