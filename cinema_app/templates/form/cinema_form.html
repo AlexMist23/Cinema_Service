@@ -9,8 +9,6 @@
 
 
 {% block content %}
-    <div class="errors">
-    </div>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

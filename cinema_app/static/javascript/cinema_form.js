@@ -10,16 +10,4 @@ document.addEventListener("DOMContentLoaded", function(event){
     postal_code.placeholder = "E. g. 12-345"
     email.placeholder = "E. g. address@emial.com"
     telephone.placeholder = "E. g. 123456789"
-
-    console.log(postal_code.value)
-    form.addEventListener('submit', function (event){
-        if (/^(\d\d-\d\d\d)$/.test(postal_code.value)){
-            console.log("True")
-        }
-        else {
-            console.log("False")
-            event.preventDefault()
-        }
-
-    })
 })

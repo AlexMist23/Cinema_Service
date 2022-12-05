@@ -8,16 +8,12 @@
 {% endblock %}
 
 
+
 {% block content %}
     <div class="form-above">
         <p>Cinema: {{ cinema.city }}</p>
-        {% if response %}
-            <br>
-            <p>{{ response }}</p>
-        {% endif %}
 
     </div>
-
 
     <form method="post">
         {% csrf_token %}

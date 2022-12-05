@@ -1,32 +1,33 @@
-from django.contrib.auth.models import User
 from django.db import models
-from .validators import validate_postal_code
+from django.contrib.auth.models import User
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
+from .validators import postal_code_validation
 
 
 # Models
 class Cinema(models.Model):
     city = models.CharField(max_length=16, unique=True)
     street = models.CharField(max_length=32)
-    postal_code = models.CharField(max_length=6, validators=[validate_postal_code])
+    postal_code = models.CharField(max_length=6, validators=[postal_code_validation])
     email = models.EmailField(max_length=64)
-    telephone = models.IntegerField()
+    telephone = models.CharField(max_length=9, validators=[RegexValidator(r'\d{9}', 'number must have 9 digits')])
 
 
 class Hall(models.Model):
-    nr = models.IntegerField()
+    nr = models.PositiveIntegerField()
     cinema_id = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-    seats_columns = models.IntegerField(default=16)
-    seats_rows = models.IntegerField(default=12)
+    seats_columns = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5), MaxValueValidator(50)])
+    seats_rows = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5), MaxValueValidator(50)])
 
 
 class Seat(models.Model):
-    nr = models.IntegerField()
+    nr = models.PositiveIntegerField()
     hall_id = models.ForeignKey(Hall, on_delete=models.CASCADE)
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=64, unique=True)
-    year = models.IntegerField()
+    year = models.PositiveSmallIntegerField()
     description = models.TextField(default=None)
 
 
@@ -37,7 +38,7 @@ class Genre(models.Model):
 
 class Screening(models.Model):
     date = models.DateField()
-    duration_min = models.IntegerField()
+    duration_min = models.PositiveIntegerField()
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
 

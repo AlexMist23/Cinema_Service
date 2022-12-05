@@ -23,6 +23,18 @@
         </div>
         <div class="details-list-el">
             <h1>Hall list:</h1>
+            {% for hall in halls %}
+                <div class="hall-list">
+                    <div>
+                        <p>Hall number {{ hall.nr }}</p>
+                        <p>Columns: {{ hall.seats_columns }}</p>
+                        <p>Rows: {{ hall.seats_rows }}</p>
+                    </div>
+                    <div >
+                        <a href="{{ cinema.id }}/details" class="button">Details</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 
     </div>
