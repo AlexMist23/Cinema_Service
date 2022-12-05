@@ -4,9 +4,22 @@ document.addEventListener("DOMContentLoaded", function(event){
     const postal_code = document.querySelector("#id_postal_code")
     const email = document.querySelector("#id_email")
     const telephone = document.querySelector("#id_telephone")
-    city.placeholder = "Example: Warsaw"
-    street.placeholder = "Example: ul. Example Street 132"
-    postal_code.placeholder = "Example: 12-345"
-    email.placeholder = "Example: address@emial.com"
-    telephone.placeholder = "Example: 123456789"
+    const form = document.querySelector("form")
+    city.placeholder = "E. g. Warsaw"
+    street.placeholder = "E. g. ul. Example Street 132"
+    postal_code.placeholder = "E. g. 12-345"
+    email.placeholder = "E. g. address@emial.com"
+    telephone.placeholder = "E. g. 123456789"
+
+    console.log(postal_code.value)
+    form.addEventListener('submit', function (event){
+        if (/^(\d\d-\d\d\d)$/.test(postal_code.value)){
+            console.log("True")
+        }
+        else {
+            console.log("False")
+            event.preventDefault()
+        }
+
+    })
 })

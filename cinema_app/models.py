@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
+from .validators import validate_postal_code
 
 
+# Models
 class Cinema(models.Model):
-    city = models.CharField(max_length=16)
+    city = models.CharField(max_length=16, unique=True)
     street = models.CharField(max_length=32)
-    postal_code = models.CharField(max_length=6)
-    email = models.EmailField(max_length=32)
+    postal_code = models.CharField(max_length=6, validators=[validate_postal_code])
+    email = models.EmailField(max_length=64)
     telephone = models.IntegerField()
 
 

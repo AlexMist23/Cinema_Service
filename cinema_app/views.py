@@ -38,23 +38,29 @@ class CinemaAddView(View):
         return render(request, 'form/cinema_form.html', {'form': form})
 
     def post(self, request):
-        form = CinemaForm(request.POST)
-        if form.is_valid():
-            city = form.cleaned_data['city']
-            street = form.cleaned_data['street']
-            postal_code = form.cleaned_data['postal_code']
-            email = form.cleaned_data['email']
-            telephone = form.cleaned_data['telephone']
+        form_r = CinemaForm(request.POST)
+        form = CinemaForm()
+        response = ''
+
+        if form_r.is_valid():
+            city = form_r.cleaned_data['city']
+            street = form_r.cleaned_data['street']
+            postal_code = form_r.cleaned_data['postal_code']
+            email = form_r.cleaned_data['email']
+            telephone = form_r.cleaned_data['telephone']
+            if city in Cinema.objects.values_list("city"):
+                response += "City of the cinema is already used"
 
             c = Cinema(city=city, street=street, postal_code=postal_code, email=email, telephone=telephone)
             c.save()
 
-            response = "Added new cinema!"
+            response += "Added new cinema!"
         else:
-            response = "Input correct data!"
+            response += "Input correct data!"
 
         cnx = {
-            "response": response
+            "response": response,
+            "form": form,
         }
         return render(request, 'form/form_response.html', cnx)
 

@@ -1,13 +1,15 @@
-from django import forms
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
+from django import forms
+from .validators import validate_postal_code
 
 
 class CinemaForm(ModelForm):
+    postal_code = forms.CharField(max_length=6, validators=[validate_postal_code], required=True)
+
     class Meta:
         model = Cinema
-        fields = '__all__'
+        fields = ['city', 'street', 'postal_code', 'email', 'telephone']
 
 
 class HallForm(ModelForm):
