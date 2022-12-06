@@ -1,0 +1,38 @@
+{% extends "__main.html" %}
+{% load static %}
+
+{% block head %}
+    <title>Cinema: {{ cinema.city }}</title>
+{% endblock %}
+
+
+{% block content %}
+    <script>
+    const seat_rows = {{ hall.seats_rows }}
+    const seat_columns = {{ hall.seats_columns }}
+    </script>
+    <script type="text/javascript" src="{% static 'javascript/hall_details.js' %}"></script>
+
+    <div class="list">
+        <div class="details-list-el">
+            <h1>Cinema: {{ cinema.city }}</h1>
+            <p>Hall nr: {{ hall.nr }}</p>
+            <p>Seats: {{ seats|length }}</p>
+            <p>Rows: {{ hall.seats_rows }}</p>
+            <p>Columns: {{ hall.seats_columns }}</p>
+        </div>
+        <div class="details-list-el-buttons">
+            <a href="" class="button">Back</a>
+            <a href="" class="button">Update</a>
+            <a href="" class="button">Delete</a>
+        </div>
+        <div class="details-list-el">
+            <h1>Seats:</h1>
+            <div class="seats_list">
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
