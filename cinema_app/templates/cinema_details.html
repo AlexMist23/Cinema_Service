@@ -2,7 +2,7 @@
 
 
 {% block head %}
-    <title>{{ cinema.city }}</title>
+    <title>Cinema: {{ cinema.city }}</title>
 {% endblock %}
 
 
@@ -31,7 +31,7 @@
                         <p>Rows: {{ hall.seats_rows }}</p>
                     </div>
                     <div >
-                        <a href="{{ cinema.id }}/details" class="button">Details</a>
+                        <a href="/hall/{{ hall.id }}" class="button">Details</a>
                     </div>
                 </div>
             {% endfor %}

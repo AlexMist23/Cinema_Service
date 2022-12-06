@@ -81,3 +81,17 @@ class HallAddView(View):
             'form': form,
             }
         return render(request, 'form/hall_form.html', cnx)
+
+
+class HallDetailsView(View):
+    def get(self, request, hall_id):
+
+        hall = Hall.objects.get(pk=hall_id)
+        cinema = hall.cinema_id
+        seats = hall.seat_set.all
+        cnx = {
+            'cinema': cinema,
+            'hall': hall,
+            'seats': seats,
+            }
+        return render(request, "hall_details.html", cnx)

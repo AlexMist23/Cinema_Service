@@ -181,3 +181,26 @@ ul.list-el li {
   align-items: center;
   border: solid 0.1em #757575;
 }
+
+.seats-list {
+  display: flex;
+}
+
+.seats-row {
+
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.seat {
+
+  width: 4em;
+  height: 4em;
+  color: black;
+  background: #dfdfdf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.4em;
+}
