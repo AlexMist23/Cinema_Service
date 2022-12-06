@@ -14,7 +14,6 @@ class HallForm(ModelForm):
     class Meta:
         model = Hall
         fields = '__all__'
-        exclude = ['cinema_id']
 
 
 class Form(ModelForm):

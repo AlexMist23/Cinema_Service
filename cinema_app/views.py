@@ -57,7 +57,7 @@ class CinemaAddView(View):
 class HallAddView(View):
     def get(self, request, cinema_id):
         cinema = Cinema.objects.get(pk=cinema_id)
-        form = HallForm()
+        form = HallForm(initial={'cinema_id': cinema})
         cnx = {
             'cinema': cinema,
             'form': form,
@@ -67,20 +67,17 @@ class HallAddView(View):
     def post(self, request, cinema_id):
         form = HallForm(request.POST)
         cinema = Cinema.objects.get(pk=cinema_id)
-        if form.is_valid():
-            nr = form.cleaned_data['nr']
-            seats_columns = form.cleaned_data['seats_columns']
-            seats_rows = form.cleaned_data['seats_rows']
-            h = Hall(nr=nr, cinema_id=cinema, seats_columns=seats_columns, seats_rows=seats_rows)
-            h.save()
 
-            for seat in range(seats_columns * seats_rows):
-                s = Seat(nr=seat, hall_id=h)
+        if form.is_valid():
+            new_hall = form.save()
+
+            for seat_nr in range(new_hall.seats_columns * new_hall.seats_rows):
+                s = Seat(nr=seat_nr, hall_id=new_hall)
                 s.save()
 
             return HttpResponseRedirect(f'/cinema/{cinema_id}')
         cnx = {
-            'form': form,
             'cinema': cinema,
+            'form': form,
             }
         return render(request, 'form/hall_form.html', cnx)
