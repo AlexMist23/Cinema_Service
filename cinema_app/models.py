@@ -16,8 +16,10 @@ class Cinema(models.Model):
 class Hall(models.Model):
     nr = models.PositiveIntegerField()
     cinema_id = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-    seats_columns = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5), MaxValueValidator(50)])
-    seats_rows = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5), MaxValueValidator(50)])
+    seats_columns = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5),
+                                                                            MaxValueValidator(25)])
+    seats_rows = models.PositiveSmallIntegerField(default=5, validators=[MinValueValidator(5),
+                                                                         MaxValueValidator(25)])
 
     class Meta:
         unique_together = ('nr', 'cinema_id')

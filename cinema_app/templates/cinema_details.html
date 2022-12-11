@@ -17,22 +17,22 @@
             <p>Tel: {{ cinema.telephone }}</p>
         </div>
         <div class="details-list-el-buttons">
-            <a href="{{ cinema.id }}/add_hall" class="button">Add Hall</a>
+            <a href="/cinema/" class="button">Return</a>
+            <a href="/cinema/{{ cinema.id }}/add_hall/" class="button">Add Hall</a>
             <a href="" class="button">Update</a>
             <a href="" class="button">Delete</a>
         </div>
         <div class="details-list-el">
-            <h1>Hall list:</h1>
+            <div>
+                <h1>Hall list:</h1>
+
+            </div>
             {% for hall in halls %}
                 <div class="hall-list">
-                    <div>
-                        <p>Hall number {{ hall.nr }}</p>
-                        <p>Columns: {{ hall.seats_columns }}</p>
-                        <p>Rows: {{ hall.seats_rows }}</p>
-                    </div>
-                    <div >
-                        <a href="/hall/{{ hall.id }}" class="button">Details</a>
-                    </div>
+                    <p>Hall nr: {{ hall.nr }}</p>
+                    <p>Columns: {{ hall.seats_columns }}</p>
+                    <p>Rows: {{ hall.seats_rows }}</p>
+                    <a href="/hall/{{ hall.id }}" class="button">Details</a>
                 </div>
             {% endfor %}
         </div>

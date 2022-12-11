@@ -10,38 +10,34 @@
 </head>
 
 <body>
-<div class="navbar">
+<header>
 
-    <div class="navbar-row">
+    <div class="navbar">
     <a class="navbar-el" href="/">Home</a>
     <a class="navbar-el" href="/">Premieres</a>
     <a class="navbar-el" href="/">About</a>
     <a class="navbar-el" href="/">Contact</a>
-
-    {% if user.is_authenticated %}
-        <a class="navbar-el-r" href="{% url 'logout' %}">Log Out</a>
+    <div id="account" class="navbar-el">
+        {% if user.is_authenticated %}
         <a class="navbar-el">{{ user.username }}</a>
-    {% else %}
-        <a class="navbar-el-r" href="{% url 'login' %}">Log In</a>
-        <a class="navbar-el" href="{% url 'signup' %}">Sign Up</a>
-    {% endif %}
+        <a class="navbar-el account-el" href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+        <a class="navbar-el">Account</a>
+        <a class="navbar-el account-el" href="{% url 'login' %}">Log In</a>
+        <a class="navbar-el account-el" href="{% url 'signup' %}">Register</a>
+        {% endif %}
+    </div>
+
     </div>
 
     {% if user.is_authenticated and user.is_superuser %}
-    <div class="navbar-row">
-        <div class="navbar-el-drop">
-            <a class="navbar-el" href="/cinema">Cinema</a>
-            <a href="/cinema/add" class="drop-item">Add</a>
-            <a href="/" class="drop-item">Delete</a>
-        </div>
-        <div class="navbar-el-drop">
-            <a class="navbar-el">Movie</a>
-            <a href="/" class="drop-item">Add</a>
-        </div>
+    <div class="navbar admin">
+        <a class="navbar-el" href="/cinema">Cinemas</a>
+        <a class="navbar-el">Movies</a>
     </div>
     {% endif %}
 
-</div>
+</header>
 
 {% block content %}
 {% endblock %}

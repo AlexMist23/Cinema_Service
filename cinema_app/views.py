@@ -23,7 +23,7 @@ class LandingPageView(View):
 class CinemaDetailsView(View):
     def get(self, request, cinema_id):
         cinema = Cinema.objects.get(pk=cinema_id)
-        halls = Hall.objects.filter(cinema_id=cinema)
+        halls = Hall.objects.filter(cinema_id=cinema).order_by('nr')
         cnx = {
             'cinema': cinema,
             'halls': halls,
@@ -57,7 +57,8 @@ class CinemaAddView(View):
 class HallAddView(View):
     def get(self, request, cinema_id):
         cinema = Cinema.objects.get(pk=cinema_id)
-        form = HallForm(initial={'cinema_id': cinema})
+        form = HallForm(initial={'cinema_id': cinema,
+                                 'nr': cinema.hall_set.count() + 1})
         cnx = {
             'cinema': cinema,
             'form': form,
@@ -89,6 +90,7 @@ class HallDetailsView(View):
         hall = Hall.objects.get(pk=hall_id)
         cinema = hall.cinema_id
         seats = hall.seat_set.all
+
         cnx = {
             'cinema': cinema,
             'hall': hall,

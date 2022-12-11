@@ -22,17 +22,14 @@
             <p>Columns: {{ hall.seats_columns }}</p>
         </div>
         <div class="details-list-el-buttons">
-            <a href="" class="button">Back</a>
+            <a href="/cinema/{{ cinema.id }}" class="button">Back</a>
             <a href="" class="button">Update</a>
             <a href="" class="button">Delete</a>
         </div>
-        <div class="details-list-el">
-            <h1>Seats:</h1>
-            <div class="seats_list">
-
-            </div>
-        </div>
-
     </div>
-
+    <div class="hall-view">
+        <p id="screen">SCREEN</p>
+        <div class="seats_list">
+        </div>
+    </div>
 {% endblock %}
