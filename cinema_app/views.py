@@ -73,7 +73,7 @@ class HallAddView(View):
             new_hall = form.save()
 
             for seat_nr in range(new_hall.seats_columns * new_hall.seats_rows):
-                s = Seat(nr=seat_nr, hall_id=new_hall)
+                s = Seat(nr=seat_nr + 1, hall_id=new_hall)
                 s.save()
 
             return HttpResponseRedirect(f'/cinema/{cinema_id}')
@@ -89,7 +89,7 @@ class HallDetailsView(View):
 
         hall = Hall.objects.get(pk=hall_id)
         cinema = hall.cinema_id
-        seats = hall.seat_set.all
+        seats = hall.seat_set.all()
 
         cnx = {
             'cinema': cinema,
@@ -97,3 +97,17 @@ class HallDetailsView(View):
             'seats': seats,
             }
         return render(request, "hall_details.html", cnx)
+
+
+class SeatDetailsView(View):
+    def get(self, request, seat_id):
+        seat = Seat.objects.get(pk=seat_id)
+        hall = seat.hall_id
+        cinema = hall.cinema_id
+
+        cnx = {
+            "seat": seat,
+            "hall": hall,
+            "cinema": cinema
+        }
+        return render(request, "seat_details.html", cnx)

@@ -1,0 +1,24 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Cinema: {{ cinema.city }}</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="list">
+        <div class="details-list-el">
+            <h1>Seat nr: {{ seat.nr }}</h1>
+            <p>Hall nr: {{ hall.nr }}</p>
+            <p>Cinema: {{ cinema.city }}</p>
+        </div>
+        <div class="details-list-el-buttons">
+            <a href="/hall/{{ hall.id }}" class="button">Back</a>
+            <a href="" class="button">Update</a>
+            <a href="" class="button">Delete</a>
+        </div>
+    </div>
+
+{% endblock %}

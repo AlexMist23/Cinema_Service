@@ -1,19 +1,16 @@
 document.addEventListener("DOMContentLoaded", function(event){
 
     const seats_div = document.querySelector(".seats_list")
+    const seats = document.querySelectorAll( 'div.seats_list a');
 
-    for (let x = 1; x <= (seat_columns * seat_rows); x = x + seat_columns)
-    {
-        let new_row = document.createElement("div")
+    let new_row = document.createElement("div")
+    seats.forEach(seat=>{
         new_row.classList.add("seats-row")
-        for (let i = 1; i <= seat_rows; i++)
-        {
-            let new_seat = document.createElement("div")
-            new_seat.innerText = ((i + x)-1).toString()
-            new_seat.classList.add("seat")
-            new_row.appendChild(new_seat)
+        new_row.appendChild(seat)
+        if (seat.innerText % seat_rows === 0){
+            seats_div.appendChild(new_row)
+            new_row = document.createElement("div")
+            new_row.classList.add("seats-row")
         }
-        seats_div.appendChild(new_row)
-
-    }
+    })
 })

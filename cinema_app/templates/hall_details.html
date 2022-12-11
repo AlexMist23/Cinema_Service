@@ -15,8 +15,8 @@
 
     <div class="list">
         <div class="details-list-el">
-            <h1>Cinema: {{ cinema.city }}</h1>
-            <p>Hall nr: {{ hall.nr }}</p>
+            <h1>Hall nr: {{ hall.nr }}</h1>
+            <p>Cinema: {{ cinema.city }}</p>
             <p>Seats: {{ seats|length }}</p>
             <p>Rows: {{ hall.seats_rows }}</p>
             <p>Columns: {{ hall.seats_columns }}</p>
@@ -30,6 +30,9 @@
     <div class="hall-view">
         <p id="screen">SCREEN</p>
         <div class="seats_list">
+            {% for seat in seats %}
+                <a class="seat" href="/seat/{{ seat.id }}"> {{ seat.nr }}</a>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

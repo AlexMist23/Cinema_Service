@@ -35,7 +35,7 @@ class Seat(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=64, unique=True)
-    year = models.PositiveSmallIntegerField()
+    year = models.PositiveSmallIntegerField(validators=[MinValueValidator(1900)])
     description = models.TextField(default=None)
 
 
@@ -56,6 +56,6 @@ class Reservation(models.Model):
     available = models.BooleanField(default=True)
 
 
-class Ticket:
+class Ticket(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE, unique=True)
