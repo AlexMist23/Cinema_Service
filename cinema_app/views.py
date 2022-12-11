@@ -5,7 +5,7 @@ from django.views import View, generic
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
-from .forms import CinemaForm, HallForm
+from .forms import CinemaForm, HallForm, MovieForm
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
 
 
@@ -111,3 +111,26 @@ class SeatDetailsView(View):
             "cinema": cinema
         }
         return render(request, "seat_details.html", cnx)
+
+
+class MovieAddView(View):
+    def get(self, request):
+        form = MovieForm()
+        return render(request, 'form/cinema_form.html', {'form': form})
+
+    def post(self, request):
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/cinema')
+        cnx = {
+            "form": form,
+        }
+        return render(request, 'form/movie_form.html', cnx)
+
+
+class MovieListView(View):
+    def get(self, request):
+        movies = Movie.objects.all()
+        cnx = {"movies": movies}
+        return render(request, "movie_list.html", cnx)

@@ -9,14 +9,14 @@
 {% block content %}
 
     <li class="list">
-        <h1>List of Cinemas</h1>
+        <h1>List of Movies</h1>
             <div>
-            <a href="/cinema/add/" class="button">Add Cinema</a>
+            <a href="/movie/add/" class="button">Add Movie</a>
             </div>
-        {% for cinema in cinemas %}
+        {% for movie in movies %}
         <ul class="list-el">
-            <li>{{ cinema.city }}</li>
-            <a class="button" href="/cinema/{{ cinema.id }}">Edit</a>
+            <li>{{ movie.title }}</li>
+            <a class="button" href="/cinema/{{ movie.id }}">Edit</a>
         </ul>
         {% endfor %}
     </li>

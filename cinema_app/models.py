@@ -33,15 +33,15 @@ class Seat(models.Model):
         unique_together = ('nr', 'hall_id')
 
 
+class Genre(models.Model):
+    name = models.CharField(max_length=16, unique=True)
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=64, unique=True)
     year = models.PositiveSmallIntegerField(validators=[MinValueValidator(1900)])
     description = models.TextField(default=None)
-
-
-class Genre(models.Model):
-    name = models.CharField(max_length=16)
-    movie_id = models.ManyToManyField(Movie)
+    genre = models.ManyToManyField(Genre)
 
 
 class Screening(models.Model):

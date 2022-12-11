@@ -1,0 +1,18 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Add Movie</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/movie_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Movie</button>
+    </form>
+
+{% endblock %}

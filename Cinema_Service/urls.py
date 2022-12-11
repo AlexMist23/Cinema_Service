@@ -19,7 +19,8 @@ from django.urls import path, include
 from cinema_app.views import LandingPageView, SignUpView, \
     CinemaAddView, CinemaDetailsView, CinemaListView, \
     HallAddView, HallDetailsView, \
-    SeatDetailsView
+    SeatDetailsView, \
+    MovieAddView, MovieListView
 
 
 urlpatterns = [
@@ -33,4 +34,6 @@ urlpatterns = [
     path('cinema/<int:cinema_id>/add_hall/', HallAddView.as_view()),
     path('hall/<int:hall_id>', HallDetailsView.as_view()),
     path('seat/<int:seat_id>', SeatDetailsView.as_view()),
+    path('movie/', MovieListView.as_view()),
+    path('movie/add/', MovieAddView.as_view()),
 ]

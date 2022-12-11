@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function(){
-    const city = document.querySelector("#id_city")
+document.addEventListener("DOMContentLoaded", function(event){
+    const title = document.querySelector("#id_city")
     const street = document.querySelector("#id_street")
     const postal_code = document.querySelector("#id_postal_code")
     const email = document.querySelector("#id_email")

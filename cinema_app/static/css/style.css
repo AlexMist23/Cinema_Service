@@ -80,7 +80,7 @@ button{
 	text-decoration: none;
 	color: #fff;
 	font-weight: bold;
-	border: solid 1px #848484;
+	outline: solid 1px #713333;
 }
 
 form{
@@ -135,7 +135,7 @@ form ul{
 .list h1{
 	padding: 10px;
 	border-bottom: solid;
-	margin: 0px 0px 35px 0;
+	margin: 20px auto;
 }
 .list-el {
 	display: flex;
@@ -164,8 +164,8 @@ ul.list-el li {
 .details-list-el-buttons{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
-	border: solid #242424 0.1em;
+	justify-content: space-around;
+	margin: 15px 0;
 }
 .form-above{
 	display: flex;
@@ -184,7 +184,7 @@ ul.list-el li {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border: solid 0.1em #757575;
+	outline: solid 1px #484848;
 	padding: 0 20px;
 }
 .hall-list div{
@@ -199,14 +199,14 @@ ul.list-el li {
 	margin: auto;
 }
 .seat {
-	width: 50px;
-	height: 50px;
+	width: 55px;
+	height: 55px;
 	color: black;
 	background: #dfdfdf;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0.4em;
+	margin: 5px;
 	text-decoration: none;
 }
 
@@ -220,9 +220,18 @@ ul.list-el li {
 }
 
 #screen{
-
 	background: gray;
 	align-self: center;
 	text-align: center;
 	padding: 5px 40%;
+}
+
+.row-symbol{
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	font-size: large;
 }
