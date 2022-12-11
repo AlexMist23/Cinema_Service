@@ -12,6 +12,9 @@ class Cinema(models.Model):
     email = models.EmailField(max_length=64)
     telephone = models.CharField(max_length=9, validators=[RegexValidator(r'\d{9}', 'number must have 9 digits')])
 
+    def __str__(self):
+        return f'Cinema: {self.city}'
+
 
 class Hall(models.Model):
     nr = models.PositiveIntegerField()
@@ -36,12 +39,18 @@ class Seat(models.Model):
 class Genre(models.Model):
     name = models.CharField(max_length=16, unique=True)
 
+    def __str__(self):
+        return f'Genre: {self.name}'
+
 
 class Movie(models.Model):
     title = models.CharField(max_length=64, unique=True)
     year = models.PositiveSmallIntegerField(validators=[MinValueValidator(1900)])
     description = models.TextField(default=None)
     genre = models.ManyToManyField(Genre)
+
+    def __str__(self):
+        return f'Movie: {self.title}'
 
 
 class Screening(models.Model):

@@ -1,0 +1,18 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Add Genre</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/genre_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Genre</button>
+    </form>
+
+{% endblock %}

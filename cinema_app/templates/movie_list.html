@@ -2,7 +2,7 @@
 
 
 {% block head %}
-    <title>Home</title>
+    <title>List Of Movies</title>
 {% endblock %}
 
 
@@ -16,7 +16,7 @@
         {% for movie in movies %}
         <ul class="list-el">
             <li>{{ movie.title }}</li>
-            <a class="button" href="/cinema/{{ movie.id }}">Edit</a>
+            <a class="button" href="/movie/{{ movie.id }}">Edit</a>
         </ul>
         {% endfor %}
     </li>

@@ -5,7 +5,7 @@ from django.views import View, generic
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
-from .forms import CinemaForm, HallForm, MovieForm
+from .forms import CinemaForm, HallForm, MovieForm, GenreForm
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
 
 
@@ -121,8 +121,8 @@ class MovieAddView(View):
     def post(self, request):
         form = MovieForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/cinema')
+            movie = form.save()
+            return HttpResponseRedirect(f'/movie/{movie.id}')
         cnx = {
             "form": form,
         }
@@ -132,5 +132,43 @@ class MovieAddView(View):
 class MovieListView(View):
     def get(self, request):
         movies = Movie.objects.all()
-        cnx = {"movies": movies}
+        cnx = {
+            "movies": movies,
+        }
         return render(request, "movie_list.html", cnx)
+
+
+class MovieDetailsView(View):
+    def get(self, request, movie_id):
+        movie = Movie.objects.get(pk=movie_id)
+        genres = movie.genre.all()
+        screenings = Screening.objects.filter(movie_id=movie)
+        cnx = {
+            'movie': movie,
+            "genres": genres,
+            'screenings': screenings,
+        }
+        return render(request, "movie_details.html", cnx)
+
+
+class GenreListView(View):
+    def get(self, request):
+        genres = Genre.objects.all()
+        cnx = {"genres": genres}
+        return render(request, "genre_list.html", cnx)
+
+
+class GenreAddView(View):
+    def get(self, request):
+        form = GenreForm()
+        return render(request, 'form/genre_form.html', {'form': form})
+
+    def post(self, request):
+        form = GenreForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/genre')
+        cnx = {
+            "form": form,
+        }
+        return render(request, 'form/genre_form.html', cnx)

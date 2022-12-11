@@ -1,0 +1,40 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Movie: {{ movie.title }}</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="list">
+        <div class="details-list-el">
+            <h1>Title: {{ movie.title }}</h1>
+            <p>Year: {{ movie.year }}</p>
+            <p>Description: {{ movie.description }}</p>
+            <p>Genres: {{ movie.genre }}</p>
+            <p>Tel: {{ cinema.telephone }}</p>
+        </div>
+        <div class="details-list-el-buttons">
+            <a href="/movie/" class="button">Return</a>
+            <a href="/screening/add/" class="button">Add Screening</a>
+            <a href="" class="button">Update</a>
+            <a href="" class="button">Delete</a>
+        </div>
+        <div class="details-list-el">
+            <div>
+                <h1>Screening list:</h1>
+
+            </div>
+            {% for screening in screenings %}
+                <div class="hall-list">
+                    <p>Date: {{ screening.date }}</p>
+                    <a href="/screening/{{ screening.id }}" class="button">Details</a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

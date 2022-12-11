@@ -1,0 +1,24 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>List Of Genres</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <li class="list">
+        <h1>List of Genres</h1>
+            <div>
+            <a href="/genre/add/" class="button">Add Genre</a>
+            </div>
+        {% for genre in genres %}
+        <ul class="list-el">
+            <li>{{ genre.name }}</li>
+            <a class="button" href="/genre/{{ genre.id }}">Edit</a>
+        </ul>
+        {% endfor %}
+    </li>
+
+{% endblock %}
