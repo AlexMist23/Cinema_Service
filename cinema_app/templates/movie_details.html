@@ -13,7 +13,13 @@
             <h1>Title: {{ movie.title }}</h1>
             <p>Year: {{ movie.year }}</p>
             <p>Description: {{ movie.description }}</p>
-            <p>Genres: {{ movie.genre }}</p>
+            <div>Genres:
+                <ul>
+                    {% for genre in genres %}
+                    <li>{{ genre.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             <p>Tel: {{ cinema.telephone }}</p>
         </div>
         <div class="details-list-el-buttons">
