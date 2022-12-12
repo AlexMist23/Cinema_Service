@@ -1,0 +1,18 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Add Screening</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/screening_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Screening</button>
+    </form>
+
+{% endblock %}

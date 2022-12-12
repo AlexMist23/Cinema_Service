@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View, generic
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
-from .forms import CinemaForm, HallForm, MovieForm, GenreForm
+import datetime
+
+from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
 
 
@@ -172,3 +173,38 @@ class GenreAddView(View):
             "form": form,
         }
         return render(request, 'form/genre_form.html', cnx)
+
+
+class RepertuarView(View):
+    def get(self, request):
+        date = datetime.date.today()
+        screenings = Screening.objects.filter(date=date)
+        cnx = {
+            "screenings": screenings
+        }
+        return render(request, 'repertuar.html', cnx)
+
+
+class ScreeningView(View):
+    def get(self, request):
+        screenings = Screening.objects.all()
+        cnx = {
+            "screenings": screenings
+        }
+        return render(request, 'screenings.html', cnx)
+
+
+class ScreeningAddView(View):
+    def get(self, request):
+        form = ScreeningForm()
+        return render(request, 'form/screening_form.html', {'form': form})
+
+    def post(self, request):
+        form = ScreeningForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/screening')
+        cnx = {
+            "form": form,
+        }
+        return render(request, 'form/screening_form.html', cnx)

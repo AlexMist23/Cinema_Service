@@ -96,6 +96,11 @@ form input{
 	border: 0.3em solid #3c3c3c;
 	padding: 0.5em;
 }
+
+form select{
+	border: 0.3em solid #3c3c3c;
+	padding: 0.5em;
+}
 form label{
 	font-weight: bold;
 }

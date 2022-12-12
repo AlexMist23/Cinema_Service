@@ -21,7 +21,8 @@ from cinema_app.views import LandingPageView, SignUpView, \
     HallAddView, HallDetailsView, \
     SeatDetailsView, \
     MovieAddView, MovieListView, MovieDetailsView, \
-    GenreListView, GenreAddView
+    GenreListView, GenreAddView, \
+    RepertuarView, ScreeningView, ScreeningAddView
 
 
 urlpatterns = [
@@ -40,4 +41,7 @@ urlpatterns = [
     path('movie/<int:movie_id>/', MovieDetailsView.as_view()),
     path('genre/', GenreListView.as_view()),
     path('genre/add/', GenreAddView.as_view()),
+    path('repertuar/', RepertuarView.as_view()),
+    path('screening/', ScreeningView.as_view()),
+    path('screening/add/', ScreeningAddView.as_view()),
 ]

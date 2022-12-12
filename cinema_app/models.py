@@ -27,6 +27,9 @@ class Hall(models.Model):
     class Meta:
         unique_together = ('nr', 'cinema_id')
 
+    def __str__(self):
+        return f'{self.cinema_id}, Hall nr {self.nr}'
+
 
 class Seat(models.Model):
     nr = models.PositiveIntegerField()
@@ -54,9 +57,10 @@ class Movie(models.Model):
 
 
 class Screening(models.Model):
-    date = models.DateField()
-    duration_min = models.PositiveIntegerField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    hall_id = models.ForeignKey(Hall, on_delete=models.CASCADE)
 
 
 class Reservation(models.Model):
