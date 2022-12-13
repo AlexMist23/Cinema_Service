@@ -2,10 +2,17 @@
 
 {% block head %}
     <title>Home</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/select_cinema.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-    <div class="lorem-ipsum">
-        <p>Welcome on the Home page!</p>
+    <div id="select-cinema">
+        <p id="select-cinema-p">Select Your Cinema</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ select_cinema.as_p }}
+            <button type="submit">Select</button>
+        </form>
     </div>
 {% endblock %}

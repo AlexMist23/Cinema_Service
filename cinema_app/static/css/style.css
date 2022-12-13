@@ -81,6 +81,7 @@ button{
 	color: #fff;
 	font-weight: bold;
 	outline: solid 1px #713333;
+	margin: auto 0;
 }
 
 form{
@@ -191,6 +192,8 @@ ul.list-el li {
 	align-items: center;
 	outline: solid 1px #484848;
 	padding: 0 20px;
+	background: #000;
+	font-weight: bold;
 }
 .hall-list div{
 
@@ -239,4 +242,21 @@ ul.list-el li {
 	align-items: center;
 	margin: auto;
 	font-size: large;
+}
+
+#user-tickets{
+	margin-left: 550px;
+}
+
+#select-cinema{
+
+	display: flex;
+	flex-direction: column;
+}
+
+#select-cinema-p{
+
+	font-size: xx-large;
+	align-self: center;
+	margin: 80px 0 -110px 0;
 }

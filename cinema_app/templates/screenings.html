@@ -15,7 +15,7 @@
             </div>
         {% for screening in screenings %}
         <ul class="list-el">
-            <li>{{ screening.start_date }}</li>
+            <li>{{ screening.start_date }} {{ screening.movie_id }} {{ screening.hall_id }}</li>
             <a class="button" href="/screening/{{ screening.id }}">Edit</a>
         </ul>
         {% endfor %}

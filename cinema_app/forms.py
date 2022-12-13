@@ -39,3 +39,6 @@ class ScreeningForm(ModelForm):
         model = Screening
         fields = ['start_date', 'end_date', 'movie_id', 'hall_id']
 
+
+class SelectCinemaForm(forms.Form):
+    select_cinema = forms.ModelChoiceField(Cinema.objects.all(), initial=Cinema.objects.get(pk=1))

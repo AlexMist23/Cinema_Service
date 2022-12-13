@@ -13,7 +13,7 @@ class Cinema(models.Model):
     telephone = models.CharField(max_length=9, validators=[RegexValidator(r'\d{9}', 'number must have 9 digits')])
 
     def __str__(self):
-        return f'Cinema: {self.city}'
+        return f'{self.city}'
 
 
 class Hall(models.Model):
@@ -43,7 +43,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=16, unique=True)
 
     def __str__(self):
-        return f'Genre: {self.name}'
+        return f'{self.name}'
 
 
 class Movie(models.Model):
@@ -53,7 +53,7 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre)
 
     def __str__(self):
-        return f'Movie: {self.title}'
+        return f'{self.title}'
 
 
 class Screening(models.Model):

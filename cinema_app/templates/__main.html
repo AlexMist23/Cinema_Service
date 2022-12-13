@@ -17,16 +17,20 @@
     <a class="navbar-el" href="/premieres">Premieres</a>
     <a class="navbar-el" href="/about">About</a>
     <a class="navbar-el" href="/contact">Contact</a>
-    <div id="account" class="navbar-el">
         {% if user.is_authenticated %}
-        <a class="navbar-el">{{ user.username }}</a>
-        <a class="navbar-el account-el" href="{% url 'logout' %}">Log Out</a>
+            <a class="navbar-el" id="user-tickets">Your Tickets</a>
+            <div id="account" class="navbar-el">
+            <a class="navbar-el">{{ user.username }}</a>
+            <a class="navbar-el account-el" href="{% url 'logout' %}">Log Out</a>
+            </div>
         {% else %}
-        <a class="navbar-el">Account</a>
-        <a class="navbar-el account-el" href="{% url 'login' %}">Log In</a>
-        <a class="navbar-el account-el" href="{% url 'signup' %}">Register</a>
+            <div id="account" class="navbar-el">
+            <a class="navbar-el">Account</a>
+            <a class="navbar-el account-el" href="{% url 'login' %}">Log In</a>
+            <a class="navbar-el account-el" href="{% url 'signup' %}">Register</a>
+            </div>
         {% endif %}
-    </div>
+
 
     </div>
 

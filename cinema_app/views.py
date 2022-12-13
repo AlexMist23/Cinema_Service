@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 import datetime
 
-from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm
+from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm, SelectCinemaForm
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
 
 
@@ -16,9 +16,20 @@ class SignUpView(generic.CreateView):
     template_name = "registration/signup.html"
 
 
-class LandingPageView(View):
+class CinemaAddView(View):
     def get(self, request):
-        return render(request, 'landing_page.html')
+        form = CinemaForm()
+        return render(request, 'form/cinema_form.html', {'form': form})
+
+    def post(self, request):
+        form = CinemaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/cinema')
+        cnx = {
+            "form": form,
+        }
+        return render(request, 'form/cinema_form.html', cnx)
 
 
 class CinemaDetailsView(View):
@@ -37,22 +48,6 @@ class CinemaListView(View):
         cinemas = Cinema.objects.all()
         cnx = {"cinemas": cinemas}
         return render(request, "cinema_list.html", cnx)
-
-
-class CinemaAddView(View):
-    def get(self, request):
-        form = CinemaForm()
-        return render(request, 'form/cinema_form.html', {'form': form})
-
-    def post(self, request):
-        form = CinemaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/cinema')
-        cnx = {
-            "form": form,
-        }
-        return render(request, 'form/cinema_form.html', cnx)
 
 
 class HallAddView(View):
@@ -130,15 +125,6 @@ class MovieAddView(View):
         return render(request, 'form/movie_form.html', cnx)
 
 
-class MovieListView(View):
-    def get(self, request):
-        movies = Movie.objects.all()
-        cnx = {
-            "movies": movies,
-        }
-        return render(request, "movie_list.html", cnx)
-
-
 class MovieDetailsView(View):
     def get(self, request, movie_id):
         movie = Movie.objects.get(pk=movie_id)
@@ -152,11 +138,13 @@ class MovieDetailsView(View):
         return render(request, "movie_details.html", cnx)
 
 
-class GenreListView(View):
+class MovieListView(View):
     def get(self, request):
-        genres = Genre.objects.all()
-        cnx = {"genres": genres}
-        return render(request, "genre_list.html", cnx)
+        movies = Movie.objects.all()
+        cnx = {
+            "movies": movies,
+        }
+        return render(request, "movie_list.html", cnx)
 
 
 class GenreAddView(View):
@@ -175,23 +163,11 @@ class GenreAddView(View):
         return render(request, 'form/genre_form.html', cnx)
 
 
-class RepertuarView(View):
+class GenreListView(View):
     def get(self, request):
-        date = datetime.date.today()
-        screenings = Screening.objects.filter(date=date)
-        cnx = {
-            "screenings": screenings
-        }
-        return render(request, 'repertuar.html', cnx)
-
-
-class ScreeningView(View):
-    def get(self, request):
-        screenings = Screening.objects.all()
-        cnx = {
-            "screenings": screenings
-        }
-        return render(request, 'screenings.html', cnx)
+        genres = Genre.objects.all()
+        cnx = {"genres": genres}
+        return render(request, "genre_list.html", cnx)
 
 
 class ScreeningAddView(View):
@@ -208,3 +184,28 @@ class ScreeningAddView(View):
             "form": form,
         }
         return render(request, 'form/screening_form.html', cnx)
+
+
+class ScreeningView(View):
+    def get(self, request):
+        screenings = Screening.objects.all()
+        cnx = {
+            "screenings": screenings
+        }
+        return render(request, 'screenings.html', cnx)
+
+
+class LandingPageView(View):
+    def get(self, request):
+        select_cinema = SelectCinemaForm()
+        return render(request, 'landing_page.html', {'select_cinema': select_cinema})
+
+
+class RepertuarView(View):
+    def get(self, request):
+        date = datetime.date.today()
+        screenings = Screening.objects.filter(date=date)
+        cnx = {
+            "screenings": screenings
+        }
+        return render(request, 'repertuar.html', cnx)

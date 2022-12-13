@@ -34,8 +34,8 @@
 
             </div>
             {% for screening in screenings %}
-                <div class="hall-list">
-                    <p>Date: {{ screening.date }}</p>
+                <div class="list-el">
+                    <p>Date: {{ screening.start_date }}</p>
                     <a href="/screening/{{ screening.id }}" class="button">Details</a>
                 </div>
             {% endfor %}

@@ -22,11 +22,12 @@ from cinema_app.views import LandingPageView, SignUpView, \
     SeatDetailsView, \
     MovieAddView, MovieListView, MovieDetailsView, \
     GenreListView, GenreAddView, \
-    RepertuarView, ScreeningView, ScreeningAddView
+    ScreeningView, ScreeningAddView, \
+    RepertuarView
 
 
 urlpatterns = [
-    path('', LandingPageView.as_view()),
+
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
     path('signup/', SignUpView.as_view(), name='signup'),
@@ -41,7 +42,8 @@ urlpatterns = [
     path('movie/<int:movie_id>/', MovieDetailsView.as_view()),
     path('genre/', GenreListView.as_view()),
     path('genre/add/', GenreAddView.as_view()),
-    path('repertuar/', RepertuarView.as_view()),
     path('screening/', ScreeningView.as_view()),
     path('screening/add/', ScreeningAddView.as_view()),
+    path('repertuar/', LandingPageView.as_view()),
+    path('', LandingPageView.as_view()),
 ]
