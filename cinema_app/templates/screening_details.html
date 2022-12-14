@@ -1,0 +1,39 @@
+{% extends "__main.html" %}
+{% load static %}
+
+{% block head %}
+    <title>{{ movie.title }} {{ screening.start_date }}</title>
+{% endblock %}
+
+
+{% block content %}
+    <script>
+    const seat_rows = {{ hall.seats_rows }}
+    </script>
+    <script type="text/javascript" src="{% static 'javascript/screening_details.js' %}"></script>
+
+    <div class="list">
+        <div class="details-list-el">
+            <h1>Screening: {{ movie.title }} | {{ screening.start_date }}</h1>
+            <p>Cinema: {{ cinema.city }}</p>
+            <p>Hall nr: {{ hall.nr }}</p>
+        </div>
+        <div class="details-list-el-buttons">
+            <a href="/repertuar/{{ cinema.city }}" class="button">Back</a>
+            <a href="" class="button">Update</a>
+            <a href="" class="button">Delete</a>
+        </div>
+    </div>
+    <div class="hall-view">
+        <p id="screen">SCREEN</p>
+        <div class="seats_list">
+            {% for reservation in reservations %}
+                {% if reservation.available %}
+                    <a class="seat free"> {{ reservation.seat_id.nr }}</a>
+                {% else %}
+                    <a class="seat taken">{{ reservation.seat_id.nr }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

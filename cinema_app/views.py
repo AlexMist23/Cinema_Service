@@ -178,7 +178,12 @@ class ScreeningAddView(View):
     def post(self, request):
         form = ScreeningForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_screening = form.save()
+            hall = new_screening.hall_id
+            seats = hall.seat_set.all()
+            for seat in seats:
+                new_reservation = Reservation(seat_id=seat, screening_id=new_screening)
+                new_reservation.save()
             return HttpResponseRedirect('/screening')
         cnx = {
             "form": form,
@@ -186,7 +191,7 @@ class ScreeningAddView(View):
         return render(request, 'form/screening_form.html', cnx)
 
 
-class ScreeningView(View):
+class ScreeningListView(View):
     def get(self, request):
         screenings = Screening.objects.all()
         cnx = {
@@ -195,17 +200,49 @@ class ScreeningView(View):
         return render(request, 'screenings.html', cnx)
 
 
+class ScreeningDetailsView(View):
+    def get(self, request, screening_id):
+        screening = Screening.objects.get(pk=screening_id)
+        hall = screening.hall_id
+        cinema = hall.cinema_id
+        seats = hall.seat_set.all()
+        movie = screening.movie_id
+        reservations = screening.reservation_set.all().order_by('seat_id')
+
+        cnx = {
+            'movie': movie,
+            'screening': screening,
+            'cinema': cinema,
+            'hall': hall,
+            'seats': seats,
+            'reservations': reservations
+        }
+        return render(request, "screening_details.html", cnx)
+
+
 class LandingPageView(View):
     def get(self, request):
         select_cinema = SelectCinemaForm()
         return render(request, 'landing_page.html', {'select_cinema': select_cinema})
 
+    def post(self, request):
+        select_cinema = SelectCinemaForm(request.POST)
+        if select_cinema.is_valid():
+            cinema_name = select_cinema.cleaned_data['select_cinema'].city
+            return HttpResponseRedirect(f'/repertuar/{cinema_name}')
+        cnx = {
+            "select_cinema": select_cinema,
+        }
+        return render(request, 'form/screening_form.html', cnx)
+
 
 class RepertuarView(View):
-    def get(self, request):
-        date = datetime.date.today()
-        screenings = Screening.objects.filter(date=date)
+    def get(self, request, cinema_name):
+        cinema = Cinema.objects.get(city=cinema_name)
+        halls = Hall.objects.filter(cinema_id=cinema)
+        screenings = Screening.objects.filter(hall_id__in=halls)
         cnx = {
             "screenings": screenings
         }
         return render(request, 'repertuar.html', cnx)
+

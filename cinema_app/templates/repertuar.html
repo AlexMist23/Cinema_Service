@@ -2,20 +2,17 @@
 
 
 {% block head %}
-    <title>List Of Screenings</title>
+    <title>List Of Movies</title>
 {% endblock %}
 
 
 {% block content %}
 
     <li class="list">
-        <h1>List of Screenings</h1>
-            <div>
-            <a href="/screening/add/" class="button">Add Screening</a>
-            </div>
+        <h1>Repertuar</h1>
         {% for screening in screenings %}
         <ul class="list-el">
-            <li>{{ screening.start_date }} {{ screening.movie_id }}</li>
+            <li>{{ screening.movie_id }}{{ screening.start_date }}</li>
             <a class="button" href="/screening/{{ screening.id }}">Edit</a>
         </ul>
         {% endfor %}

@@ -22,7 +22,7 @@ from cinema_app.views import LandingPageView, SignUpView, \
     SeatDetailsView, \
     MovieAddView, MovieListView, MovieDetailsView, \
     GenreListView, GenreAddView, \
-    ScreeningView, ScreeningAddView, \
+    ScreeningListView, ScreeningAddView, ScreeningDetailsView, \
     RepertuarView
 
 
@@ -35,15 +35,17 @@ urlpatterns = [
     path('cinema/add/', CinemaAddView.as_view()),
     path('cinema/<int:cinema_id>/', CinemaDetailsView.as_view()),
     path('cinema/<int:cinema_id>/add_hall/', HallAddView.as_view()),
-    path('hall/<int:hall_id>', HallDetailsView.as_view()),
-    path('seat/<int:seat_id>', SeatDetailsView.as_view()),
+    path('hall/<int:hall_id>/', HallDetailsView.as_view()),
+    path('seat/<int:seat_id>/', SeatDetailsView.as_view()),
     path('movie/', MovieListView.as_view()),
     path('movie/add/', MovieAddView.as_view()),
     path('movie/<int:movie_id>/', MovieDetailsView.as_view()),
     path('genre/', GenreListView.as_view()),
     path('genre/add/', GenreAddView.as_view()),
-    path('screening/', ScreeningView.as_view()),
+    path('screening/', ScreeningListView.as_view()),
     path('screening/add/', ScreeningAddView.as_view()),
+    path('screening/<int:screening_id>/', ScreeningDetailsView.as_view()),
     path('repertuar/', LandingPageView.as_view()),
+    path('repertuar/<str:cinema_name>/', RepertuarView.as_view()),
     path('', LandingPageView.as_view()),
 ]
