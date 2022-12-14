@@ -1,0 +1,29 @@
+{% extends "__main.html" %}
+
+
+{% block head %}
+    <title>Add Reservation</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'javascript/movie_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="list">
+        <div class="details-list-el">
+            <h1>Seats Reservation</h1>
+            <p>Screening: {{ screening.movie_id }}</p>
+            <p>Cinema: {{ cinema }}</p>
+            <p>Hall: {{ hall }}</p>
+            <p>Seats: {% for seat in seats %}{{ seat }}, {% endfor %} </p>
+            <p>User: {{ user }}</p>
+        </div>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Accept Reservation</button>
+    </form>
+        <a class="button" href="/screening/{{ screening.id }}/">Back</a>
+    </div>
+
+{% endblock %}

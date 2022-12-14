@@ -2,9 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import SplitDateTimeWidget
 
-import datetime
-
-from .models import Cinema, Hall, Movie, Genre, Screening, Reservation, Ticket
+from .models import Cinema, Hall, Movie, Genre, Screening, Reservation
 
 
 class CinemaForm(ModelForm):
@@ -42,3 +40,14 @@ class ScreeningForm(ModelForm):
 
 class SelectCinemaForm(forms.Form):
     select_cinema = forms.ModelChoiceField(Cinema.objects.all(), initial=Cinema.objects.get(pk=1))
+
+
+class ReservationForm(ModelForm):
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+        exclude = ['seat_id', 'available']
+        widgets = {
+            'screening_id': forms.HiddenInput,
+            'user_id': forms.HiddenInput
+            }

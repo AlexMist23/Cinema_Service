@@ -67,8 +67,7 @@ class Reservation(models.Model):
     seat_id = models.ForeignKey(Seat, on_delete=models.CASCADE)
     screening_id = models.ForeignKey(Screening, on_delete=models.CASCADE)
     available = models.BooleanField(default=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
 
-
-class Ticket(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    Reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE, unique=True)
+    class Meta:
+        unique_together = ('seat_id', 'screening_id')

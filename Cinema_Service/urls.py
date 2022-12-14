@@ -14,16 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 
-from cinema_app.views import LandingPageView, SignUpView, \
-    CinemaAddView, CinemaDetailsView, CinemaListView, \
-    HallAddView, HallDetailsView, \
-    SeatDetailsView, \
-    MovieAddView, MovieListView, MovieDetailsView, \
-    GenreListView, GenreAddView, \
-    ScreeningListView, ScreeningAddView, ScreeningDetailsView, \
-    RepertuarView
+from cinema_app.views import LandingPageView, SignUpView, CinemaAddView, CinemaDetailsView, CinemaListView,\
+    HallAddView, HallDetailsView, SeatDetailsView, MovieAddView, MovieListView, MovieDetailsView,\
+    GenreListView, GenreAddView, ScreeningListView, ScreeningAddView, ScreeningDetailsView, RepertuarView,\
+    ReservationAddView, ReservationsListView
 
 
 urlpatterns = [
@@ -45,7 +41,9 @@ urlpatterns = [
     path('screening/', ScreeningListView.as_view()),
     path('screening/add/', ScreeningAddView.as_view()),
     path('screening/<int:screening_id>/', ScreeningDetailsView.as_view()),
+    re_path(r'^screening/(?P<screening_id>\d+)/(?P<seats>(\d{1,4},)+)/$', ReservationAddView.as_view()),
     path('repertuar/', LandingPageView.as_view()),
     path('repertuar/<str:cinema_name>/', RepertuarView.as_view()),
+    path('reservations/', ReservationsListView.as_view()),
     path('', LandingPageView.as_view()),
 ]

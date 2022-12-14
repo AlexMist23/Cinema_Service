@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 
 import datetime
 
-from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm, SelectCinemaForm
-from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation, Ticket
+from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm, SelectCinemaForm, ReservationForm
+from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation
 
 
 class SignUpView(generic.CreateView):
@@ -246,3 +246,63 @@ class RepertuarView(View):
         }
         return render(request, 'repertuar.html', cnx)
 
+
+class ReservationAddView(View):
+    def get(self, request, screening_id, seats):
+        screening = Screening.objects.get(pk=screening_id)
+        seats_nums = seats[:-1].split(',')  # Taking seats numbers into array
+        hall = screening.hall_id
+        cinema = hall.cinema_id
+        user = request.user
+
+        form = ReservationForm(initial={'screening_id': screening,
+                                        'user_id': user})
+        cnx = {
+            'cinema': cinema,
+            'hall': hall,
+            'screening': screening,
+            'seats': seats_nums,
+            'form': form,
+            'user': user
+        }
+        return render(request, 'form/reservation_form.html', cnx)
+
+    def post(self, request, screening_id, seats):
+
+        screening = Screening.objects.get(pk=screening_id)
+        seats_nums = seats[:-1].split(',')  # Taking seats numbers into array
+        hall = screening.hall_id
+        cinema = hall.cinema_id
+        user = request.user
+
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            screening_id = form.cleaned_data['screening_id']
+            user_id = form.cleaned_data['user_id']
+
+            for seat_nr in seats_nums:
+                seat = Seat.objects.get(nr=seat_nr, hall_id=hall)
+                reservation = Reservation.objects.get(screening_id=screening_id, seat_id=seat)
+                reservation.user_id = user_id
+                reservation.available = False
+                reservation.save()
+
+            return HttpResponseRedirect(f'/tickets')
+        cnx = {
+            'cinema': cinema,
+            'hall': hall,
+            'screening': screening,
+            'seats': seats_nums,
+            'form': form,
+            'user': user
+        }
+        return render(request, 'form/screening_form.html', cnx)
+
+
+class ReservationsListView(View):
+    def get(self, request):
+        reservations = Reservation.objects.filter(user_id=request.user)
+        cnx = {
+            "reservations": reservations
+        }
+        return render(request, 'user_reservations.html', cnx)

@@ -1,0 +1,24 @@
+{% extends "__main.html" %}
+
+{% block head %}
+    <title>List Of Reservations</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <li class="list">
+        <h1>List Of Reservations</h1>
+        {% for reservation in reservations %}
+        <ul class="list-el">
+            <li>
+                {{ reservation.screening_id.start_date }} ||
+                {{ reservation.screening_id.movie_id.title }} ||
+                Seat : {{ reservation.seat_id.nr }}
+            </li>
+            <a class="button" href="/screening/{{ reservation.id }}">Edit</a>
+        </ul>
+        {% endfor %}
+    </li>
+
+{% endblock %}

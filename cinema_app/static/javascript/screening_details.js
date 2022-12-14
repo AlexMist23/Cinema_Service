@@ -35,7 +35,18 @@ document.addEventListener("DOMContentLoaded", function(event){
         seat.addEventListener('click', event=>{
             seat.classList.toggle('selected')
         })
-
     })
 
+    const reservation = document.querySelector('#reservation_btn')
+    reservation.addEventListener('click', event=>{
+        let selected_seats = document.querySelectorAll('.selected')
+            if (selected_seats[0]){
+                let seats = ''
+                selected_seats.forEach(seat=>{
+                    seats += seat.innerText + ','
+                })
+                window.location.href = seats;
+            }
+
+    })
 })
