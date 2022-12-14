@@ -29,4 +29,13 @@ document.addEventListener("DOMContentLoaded", function(event){
             new_row.classList.add("seats-row")
         }
     })
+
+    const free_seats = document.querySelectorAll('a.free')
+    free_seats.forEach(seat =>{
+        seat.addEventListener('click', event=>{
+            seat.classList.toggle('selected')
+        })
+
+    })
+
 })

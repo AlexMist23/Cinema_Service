@@ -247,10 +247,14 @@ body {
  }
 
  .free{
-
+     cursor: pointer;
  }
 
  .free:hover{
 
+     background: #4fb731;
+ }
+
+ .selected{
      background: #4fb731;
  }
