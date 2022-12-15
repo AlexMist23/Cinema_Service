@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     let end_date = new Date()
     end_date.setMinutes(end_date.getMinutes() + 60)
 
-    start_date0.value = start_date.toLocaleDateString()
+    start_date0.value = start_date.toLocaleDateString('en-US');
     start_date1.value = start_date.toLocaleTimeString().slice(0,5)
-    end_date0.value = end_date.toLocaleDateString()
+    end_date0.value = end_date.toLocaleDateString('en-US')
     end_date1.value = end_date.toLocaleTimeString().slice(0,5)
 })

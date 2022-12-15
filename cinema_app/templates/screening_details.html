@@ -28,11 +28,11 @@
     <div class="hall-view">
         <p id="screen">SCREEN</p>
         <div class="seats_list">
-            {% for reservation in reservations %}
-                {% if reservation.available %}
-                    <a class="seat free"> {{ reservation.seat_id.nr }}</a>
+            {% for seat in seats %}
+                {% if seat.nr in reservations_nums %}
+                    <a class="seat taken">{{ seat.nr }}</a>
                 {% else %}
-                    <a class="seat taken">{{ reservation.seat_id.nr }}</a>
+                    <a class="seat free"> {{ seat.nr }}</a>
                 {% endif %}
             {% endfor %}
         </div>

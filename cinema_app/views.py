@@ -205,9 +205,10 @@ class ScreeningDetailsView(View):
         screening = Screening.objects.get(pk=screening_id)
         hall = screening.hall_id
         cinema = hall.cinema_id
-        seats = hall.seat_set.all()
+        seats = hall.seat_set.all().order_by('nr')
         movie = screening.movie_id
-        reservations = screening.reservation_set.all().order_by('seat_id')
+        reservations_nums = [reservation.seat_id.nr for reservation in
+                             screening.reservation_set.all()]
 
         cnx = {
             'movie': movie,
@@ -215,7 +216,7 @@ class ScreeningDetailsView(View):
             'cinema': cinema,
             'hall': hall,
             'seats': seats,
-            'reservations': reservations
+            'reservations_nums': reservations_nums
         }
         return render(request, "screening_details.html", cnx)
 
@@ -282,12 +283,10 @@ class ReservationAddView(View):
 
             for seat_nr in seats_nums:
                 seat = Seat.objects.get(nr=seat_nr, hall_id=hall)
-                reservation = Reservation.objects.get(screening_id=screening_id, seat_id=seat)
-                reservation.user_id = user_id
-                reservation.available = False
+                reservation = Reservation(screening_id=screening_id, seat_id=seat, user_id=user_id)
                 reservation.save()
 
-            return HttpResponseRedirect(f'/tickets')
+            return HttpResponseRedirect(f'/reservations')
         cnx = {
             'cinema': cinema,
             'hall': hall,

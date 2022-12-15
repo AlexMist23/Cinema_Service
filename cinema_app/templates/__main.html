@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block head %}
     {% endblock %}
-
 </head>
 
 <body>
@@ -18,7 +17,7 @@
     <a class="navbar-el" href="/about">About</a>
     <a class="navbar-el" href="/contact">Contact</a>
         {% if user.is_authenticated %}
-            <a class="navbar-el" id="user-tickets" href="/reservations">Tickets</a>
+            <a class="navbar-el" id="user-tickets" href="/reservations">Reservations</a>
             <div id="account" class="navbar-el">
             <a class="navbar-el">{{ user.username }}</a>
             <a class="navbar-el account-el" href="{% url 'logout' %}">Log Out</a>

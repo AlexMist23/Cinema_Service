@@ -66,7 +66,6 @@ class Screening(models.Model):
 class Reservation(models.Model):
     seat_id = models.ForeignKey(Seat, on_delete=models.CASCADE)
     screening_id = models.ForeignKey(Screening, on_delete=models.CASCADE)
-    available = models.BooleanField(default=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
 
     class Meta:
