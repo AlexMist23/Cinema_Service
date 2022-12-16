@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import SplitDateTimeWidget
-from django.shortcuts import get_list_or_404, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Cinema, Hall, Movie, Genre, Screening, Reservation
 
@@ -40,7 +40,10 @@ class ScreeningForm(ModelForm):
 
 
 class SelectCinemaForm(forms.Form):
-    select_cinema = forms.ModelChoiceField(get_list_or_404(Cinema), initial=get_object_or_404(Cinema.objects.get(pk=1)))
+    try:
+        select_cinema = forms.ModelChoiceField(Cinema.objects.all(), initial=Cinema.objects.get(pk=1))
+    except ObjectDoesNotExist:
+        pass
 
 
 class ReservationForm(ModelForm):
