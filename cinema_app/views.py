@@ -16,13 +16,11 @@ class SignUpView(generic.CreateView):
 
 
 class CinemaAddView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         form = CinemaForm()
         return render(request, 'form/cinema_form.html', {'form': form})
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         form = CinemaForm(request.POST)
         if form.is_valid():
             form.save()
@@ -34,8 +32,7 @@ class CinemaAddView(View):
 
 
 class CinemaDetailsView(View):
-    @staticmethod
-    def get(request, cinema_id):
+    def get(self, request, cinema_id):
         cinema = get_object_or_404(Cinema, pk=cinema_id)
         halls = Hall.objects.filter(cinema_id=cinema).order_by('nr')
         cnx = {
@@ -46,16 +43,14 @@ class CinemaDetailsView(View):
 
 
 class CinemaListView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         cinemas = get_list_or_404(Cinema)
         cnx = {"cinemas": cinemas}
         return render(request, "cinema_list.html", cnx)
 
 
 class HallAddView(View):
-    @staticmethod
-    def get(request, cinema_id):
+    def get(self, request, cinema_id):
         cinema = get_object_or_404(Cinema, pk=cinema_id)
         form = HallForm(initial={'cinema_id': cinema,
                                  'nr': cinema.hall_set.count() + 1})
@@ -65,8 +60,7 @@ class HallAddView(View):
                }
         return render(request, 'form/hall_form.html', cnx)
 
-    @staticmethod
-    def post(request, cinema_id):
+    def post(self, request, cinema_id):
         form = HallForm(request.POST)
         cinema = get_object_or_404(Cinema, pk=cinema_id)
 
@@ -86,8 +80,7 @@ class HallAddView(View):
 
 
 class HallDetailsView(View):
-    @staticmethod
-    def get(request, hall_id):
+    def get(self, request, hall_id):
 
         hall = get_object_or_404(Hall, pk=hall_id)
         cinema = hall.cinema_id
@@ -102,8 +95,7 @@ class HallDetailsView(View):
 
 
 class SeatDetailsView(View):
-    @staticmethod
-    def get(request, seat_id):
+    def get(self, request, seat_id):
         seat = get_object_or_404(Seat, pk=seat_id)
         hall = seat.hall_id
         cinema = hall.cinema_id
@@ -117,13 +109,11 @@ class SeatDetailsView(View):
 
 
 class MovieAddView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         form = MovieForm()
         return render(request, 'form/cinema_form.html', {'form': form})
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         form = MovieForm(request.POST)
         if form.is_valid():
             movie = form.save()
@@ -135,8 +125,7 @@ class MovieAddView(View):
 
 
 class MovieDetailsView(View):
-    @staticmethod
-    def get(request, movie_id):
+    def get(self, request, movie_id):
         movie = get_object_or_404(Movie, pk=movie_id)
         genres = movie.genre.all()
         screenings = Screening.objects.filter(movie_id=movie)
@@ -149,8 +138,7 @@ class MovieDetailsView(View):
 
 
 class MovieListView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         movies = Movie.objects.all()
         cnx = {
             "movies": movies,
@@ -159,13 +147,11 @@ class MovieListView(View):
 
 
 class GenreAddView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         form = GenreForm()
         return render(request, 'form/genre_form.html', {'form': form})
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         form = GenreForm(request.POST)
         if form.is_valid():
             form.save()
@@ -177,21 +163,18 @@ class GenreAddView(View):
 
 
 class GenreListView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         genres = get_list_or_404(Genre)
         cnx = {"genres": genres}
         return render(request, "genre_list.html", cnx)
 
 
 class ScreeningAddView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         form = ScreeningForm()
         return render(request, 'form/screening_form.html', {'form': form})
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         form = ScreeningForm(request.POST)
         if form.is_valid():
             new_screening = form.save()
@@ -208,8 +191,7 @@ class ScreeningAddView(View):
 
 
 class ScreeningListView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         screenings = get_list_or_404(Screening)
         cnx = {
             "screenings": screenings
@@ -218,8 +200,7 @@ class ScreeningListView(View):
 
 
 class ScreeningDetailsView(View):
-    @staticmethod
-    def get(request, screening_id):
+    def get(self, request, screening_id):
         screening = get_object_or_404(Screening, pk=screening_id)
         hall = screening.hall_id
         cinema = hall.cinema_id
@@ -240,13 +221,11 @@ class ScreeningDetailsView(View):
 
 
 class LandingPageView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         select_cinema = SelectCinemaForm()
         return render(request, 'landing_page.html', {'select_cinema': select_cinema})
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         select_cinema = SelectCinemaForm(request.POST)
         if select_cinema.is_valid():
             cinema_name = select_cinema.cleaned_data['select_cinema'].city
@@ -258,8 +237,7 @@ class LandingPageView(View):
 
 
 class RepertuarView(View):
-    @staticmethod
-    def get(request, cinema_name):
+    def get(self, request, cinema_name):
         cinema = get_object_or_404(Cinema, city=cinema_name)
         halls = Hall.objects.filter(cinema_id=cinema)
         screenings = Screening.objects.filter(hall_id__in=halls)
@@ -270,8 +248,7 @@ class RepertuarView(View):
 
 
 class ReservationAddView(View):
-    @staticmethod
-    def get(request, screening_id, seats):
+    def get(self, request, screening_id, seats):
         screening = get_object_or_404(Screening, pk=screening_id)
         seats_nums = seats[:-1].split(',')  # Taking seats numbers into array
         hall = screening.hall_id
@@ -290,8 +267,7 @@ class ReservationAddView(View):
         }
         return render(request, 'form/reservation_form.html', cnx)
 
-    @staticmethod
-    def post(request, screening_id, seats):
+    def post(self, request, screening_id, seats):
 
         screening = get_object_or_404(Screening, pk=screening_id)
         seats_nums = seats[:-1].split(',')  # Taking seats numbers into array
@@ -322,8 +298,7 @@ class ReservationAddView(View):
 
 
 class ReservationsListView(View):
-    @staticmethod
-    def get(request):
+    def get(self, request):
         reservations = Reservation.objects.filter(user_id=request.user)
         cnx = {
             "reservations": reservations
