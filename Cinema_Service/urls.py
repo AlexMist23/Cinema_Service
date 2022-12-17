@@ -48,3 +48,5 @@ urlpatterns = [
     path('reservations/', ReservationsListView.as_view(), name='reservations'),
     path('', LandingPageView.as_view(), name='landing_page'),
 ]
+
+handler404 = "cinema_app.views.page_not_found_view"

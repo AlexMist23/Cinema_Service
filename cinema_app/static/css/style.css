@@ -67,13 +67,15 @@ body {
 }
  .button{
      background: #531111;
-     padding: 12px 24px;
+     display: block;
      text-decoration: none;
      color: #fff;
      font-weight: bold;
      outline: solid 1px #713333;
      margin: auto 0;
      cursor: pointer;
+     width: fit-content;
+     padding: 12px;
 }
  form{
      background: #242424;
@@ -124,7 +126,7 @@ body {
      flex-direction: column;
      width: 1000px;
      background: #1a1a1a;
-     padding: 1em;
+     padding: 2em;
      border: solid #353535 0.1em;
      margin: 100px auto auto auto;
 }
@@ -259,4 +261,8 @@ body {
 
  .selected{
      background: #4fb731;
+ }
+
+ #page404{
+     background: white;
  }

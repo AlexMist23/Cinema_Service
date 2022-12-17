@@ -10,6 +10,10 @@ from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm, Se
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation
 
 
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
+
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
