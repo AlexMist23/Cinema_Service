@@ -15,7 +15,7 @@
                 <p>{{ repertuar_day.0 }}</p>
                 {% for screening in repertuar_day.1 %}
                 <ul class="list-el" >
-                    <li>{{ screening.movie_id }} - {{ screening.start_date }}</li>
+                    <li>{{ screening.movie_id }} - {{ screening }}</li>
                     <a class="button" href="/screening/{{ screening.id }}">Edit</a>
                 </ul>
                 {% endfor %}

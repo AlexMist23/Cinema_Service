@@ -62,6 +62,9 @@ class Screening(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     hall_id = models.ForeignKey(Hall, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{str(self.start_date)[11:-9]}'
+
 
 class Reservation(models.Model):
     seat_id = models.ForeignKey(Seat, on_delete=models.CASCADE)

@@ -268,5 +268,7 @@ body {
  }
 
  .day-list{
-     background: black;
+    background: #111;
+    margin: 10px;
+    outline: solid 1px #484848;
  }
