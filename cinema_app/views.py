@@ -44,7 +44,7 @@ class CinemaDetailsView(View):
 
 class CinemaListView(View):
     def get(self, request):
-        cinemas = get_list_or_404(Cinema)
+        cinemas = Cinema.objects.all()
         cnx = {"cinemas": cinemas}
         return render(request, "cinema_list.html", cnx)
 
@@ -164,7 +164,7 @@ class GenreAddView(View):
 
 class GenreListView(View):
     def get(self, request):
-        genres = get_list_or_404(Genre)
+        genres = Genre.objects.all()
         cnx = {"genres": genres}
         return render(request, "genre_list.html", cnx)
 

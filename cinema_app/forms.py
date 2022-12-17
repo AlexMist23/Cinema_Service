@@ -41,10 +41,12 @@ class ScreeningForm(ModelForm):
 
 class SelectCinemaForm(forms.Form):
     try:
-        select_cinema = forms.ModelChoiceField(Cinema.objects.all(), initial=Cinema.objects.get(pk=1))
+        all_cinemas = Cinema.objects.all()
     except ObjectDoesNotExist:
         pass
 
+    select_cinema = forms.ModelChoiceField(queryset=all_cinemas,
+                                           initial=all_cinemas.order_by('id')[0])
 
 class ReservationForm(ModelForm):
     class Meta:
