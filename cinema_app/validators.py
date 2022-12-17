@@ -13,7 +13,7 @@ def postal_code_validation(postal_code):
 
 
 def phone_num_valid(phone_num):
-    if len(str(phone_num)) != 9:
+    if not (re.fullmatch(r"\d{9}", phone_num)):
         raise ValidationError(
             _("%(phone_num)s does not have 9 digits"),
             code='phone_error',
