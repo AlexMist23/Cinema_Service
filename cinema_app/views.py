@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View, generic
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -15,7 +16,7 @@ class SignUpView(generic.CreateView):
     template_name = "registration/signup.html"
 
 
-class CinemaAddView(View):
+class CinemaAddView(LoginRequiredMixin, View):
     def get(self, request):
         form = CinemaForm()
         return render(request, 'form/cinema_form.html', {'form': form})
@@ -42,14 +43,14 @@ class CinemaDetailsView(View):
         return render(request, "cinema_details.html", cnx)
 
 
-class CinemaListView(View):
+class CinemaListView(LoginRequiredMixin, View):
     def get(self, request):
         cinemas = Cinema.objects.all()
         cnx = {"cinemas": cinemas}
         return render(request, "cinema_list.html", cnx)
 
 
-class HallAddView(View):
+class HallAddView(LoginRequiredMixin, View):
     def get(self, request, cinema_id):
         cinema = get_object_or_404(Cinema, pk=cinema_id)
         form = HallForm(initial={'cinema_id': cinema,
@@ -79,7 +80,7 @@ class HallAddView(View):
         return render(request, 'form/hall_form.html', cnx)
 
 
-class HallDetailsView(View):
+class HallDetailsView(LoginRequiredMixin, View):
     def get(self, request, hall_id):
 
         hall = get_object_or_404(Hall, pk=hall_id)
@@ -94,7 +95,7 @@ class HallDetailsView(View):
         return render(request, "hall_details.html", cnx)
 
 
-class SeatDetailsView(View):
+class SeatDetailsView(LoginRequiredMixin, View):
     def get(self, request, seat_id):
         seat = get_object_or_404(Seat, pk=seat_id)
         hall = seat.hall_id
@@ -108,7 +109,7 @@ class SeatDetailsView(View):
         return render(request, "seat_details.html", cnx)
 
 
-class MovieAddView(View):
+class MovieAddView(LoginRequiredMixin, View):
     def get(self, request):
         form = MovieForm()
         return render(request, 'form/cinema_form.html', {'form': form})
@@ -146,7 +147,7 @@ class MovieListView(View):
         return render(request, "movie_list.html", cnx)
 
 
-class GenreAddView(View):
+class GenreAddView(LoginRequiredMixin, View):
     def get(self, request):
         form = GenreForm()
         return render(request, 'form/genre_form.html', {'form': form})
@@ -169,7 +170,7 @@ class GenreListView(View):
         return render(request, "genre_list.html", cnx)
 
 
-class ScreeningAddView(View):
+class ScreeningAddView(LoginRequiredMixin, View):
     def get(self, request):
         form = ScreeningForm()
         return render(request, 'form/screening_form.html', {'form': form})
@@ -247,7 +248,7 @@ class RepertuarView(View):
         return render(request, 'repertuar.html', cnx)
 
 
-class ReservationAddView(View):
+class ReservationAddView(LoginRequiredMixin, View):
     def get(self, request, screening_id, seats):
         screening = get_object_or_404(Screening, pk=screening_id)
         seats_nums = seats[:-1].split(',')  # Taking seats numbers into array
@@ -297,7 +298,7 @@ class ReservationAddView(View):
         return render(request, 'form/screening_form.html', cnx)
 
 
-class ReservationsListView(View):
+class ReservationsListView(LoginRequiredMixin, View):
     def get(self, request):
         reservations = Reservation.objects.filter(user_id=request.user)
         cnx = {
