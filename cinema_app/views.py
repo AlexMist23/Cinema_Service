@@ -4,7 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View, generic
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
+
+from datetime import datetime, timedelta, time
 
 from .forms import CinemaForm, HallForm, MovieForm, GenreForm, ScreeningForm, SelectCinemaForm, ReservationForm
 from .models import Cinema, Hall, Seat, Movie, Genre, Screening, Reservation
@@ -43,7 +45,7 @@ class CinemaDetailsView(View):
         cnx = {
             'cinema': cinema,
             'halls': halls,
-            }
+        }
         return render(request, "cinema_details.html", cnx)
 
 
@@ -62,7 +64,7 @@ class HallAddView(LoginRequiredMixin, View):
         cnx = {
             'cinema': cinema,
             'form': form,
-               }
+        }
         return render(request, 'form/hall_form.html', cnx)
 
     def post(self, request, cinema_id):
@@ -80,13 +82,12 @@ class HallAddView(LoginRequiredMixin, View):
         cnx = {
             'cinema': cinema,
             'form': form,
-            }
+        }
         return render(request, 'form/hall_form.html', cnx)
 
 
 class HallDetailsView(LoginRequiredMixin, View):
     def get(self, request, hall_id):
-
         hall = get_object_or_404(Hall, pk=hall_id)
         cinema = hall.cinema_id
         seats = hall.seat_set.all()
@@ -95,7 +96,7 @@ class HallDetailsView(LoginRequiredMixin, View):
             'cinema': cinema,
             'hall': hall,
             'seats': seats,
-            }
+        }
         return render(request, "hall_details.html", cnx)
 
 
@@ -197,7 +198,7 @@ class ScreeningAddView(LoginRequiredMixin, View):
 
 class ScreeningListView(View):
     def get(self, request):
-        screenings = get_list_or_404(Screening)
+        screenings = Screening.objects.all()
         cnx = {
             "screenings": screenings
         }
@@ -246,8 +247,29 @@ class RepertuarView(View):
         cinema = get_object_or_404(Cinema, city=cinema_name)
         halls = Hall.objects.filter(cinema_id=cinema)
         screenings = Screening.objects.filter(hall_id__in=halls)
+        repertuar_days = []
+        screenings_per_day = []
+        movies_per_day = []
+        days = []
+
+        def screening_of_day(result_date):  # result_date = datetime.now().date() + timedelta(n)
+            today = result_date
+            tomorrow = today + timedelta(1)
+            today_start = datetime.combine(today, time())
+            today_end = datetime.combine(tomorrow, time())
+            return screenings.filter(start_date__lte=today_end, start_date__gt=today_start)
+
+        for day in range(7):
+            repertuar_days.append([])
+            screenings_per_day.append(screening_of_day(datetime.now().date() + timedelta(day)))
+            days.append(datetime.now().date() + timedelta(day))
+            repertuar_days[day].append(days[day])
+            repertuar_days[day].append(screenings_per_day[day])
         cnx = {
-            "screenings": screenings
+            "screenings_per_day": screenings_per_day,
+            "movies_per_day": movies_per_day,
+            "days": days,
+            "repertuar_days": repertuar_days,
         }
         return render(request, 'repertuar.html', cnx)
 

@@ -10,11 +10,16 @@
 
     <li class="list">
         <h1>Repertuar</h1>
-        {% for screening in screenings %}
-        <ul class="list-el">
-            <li>{{ screening.movie_id }}{{ screening.start_date }}</li>
-            <a class="button" href="/screening/{{ screening.id }}">Edit</a>
-        </ul>
+        {% for repertuar_day in repertuar_days%}
+            <div class="day-list">
+                <p>{{ repertuar_day.0 }}</p>
+                {% for screening in repertuar_day.1 %}
+                <ul class="list-el" >
+                    <li>{{ screening.movie_id }} - {{ screening.start_date }}</li>
+                    <a class="button" href="/screening/{{ screening.id }}">Edit</a>
+                </ul>
+                {% endfor %}
+            </div>
         {% endfor %}
     </li>
 
