@@ -11,6 +11,7 @@ from cinema_app.models import Cinema, Hall, Seat, Movie, Genre, Screening, Reser
 
 
 class TestUrl(SimpleTestCase):
+    """Test if url connects to proper View"""
 
     def test_sign_up(self):
         url = reverse('signup')
